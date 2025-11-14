@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+if [ ! -d /tmp/ocr/ ]
+then
+mkdir /tmp/ocr/
+fi
+
+filename="/tmp/ocr/$(date +"%Y-%m-%d_%H:%M:%S.%N").jpg"
+
+gnome-screenshot -a --file=$filename
+
+tesseract -l eng $filename - quiet | xclip -selection clipboard
